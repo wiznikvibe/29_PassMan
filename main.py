@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 import string
 import random
-import pyperclick
+
 
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
@@ -20,7 +20,7 @@ def gen_pass():
     random.shuffle(pwdList)
     password = "".join(pwdList)
     pwd_entry.insert(0,password)
-    pyperclick.copy(password)
+   
 
 
 
