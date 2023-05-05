@@ -2,6 +2,19 @@ from tkinter import *
 from tkinter import messagebox
 import string
 import random
+import json
+
+"""
+    ##-------------- Catching Exceptions and throwing errors --------------##
+    try:
+        Something that might cause an exception
+    except Exception as e:
+        Do this  if there was an exception
+    else:
+        Carry this out if there were no exceptions
+    finally:
+        Carry this out no matter what happens 
+"""
 
 
 
@@ -31,16 +44,21 @@ def pass_save():
     user_mail = user_entry.get()
     password = pwd_entry.get()
 
+    new_data = {
+        website: {
+            'email': user_mail,
+            'password': password
+        }
+    }
+
     if len(website)==0 or len(password)==0:
         messagebox.showinfo(title='OOps', message="Please make sure to not leave any fields empty.")
         
     else:
-        is_ok = messagebox.askokcancel(title=website,message=f'Details entered:\n Email:{user_mail}\n Password:{password}\n Are you sure you want to save it?')
-        if is_ok:
-            with open('data.txt','a') as data_file:
-                data_file.write(f'{website} | {user_mail} | {password}\n')
-                web_entry.delete(0,END)
-                pwd_entry.delete(0,END) 
+        with open('data.json','w') as data_file:
+            json.dump(new_data, data_file)
+            web_entry.delete(0,END)
+            pwd_entry.delete(0,END) 
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
